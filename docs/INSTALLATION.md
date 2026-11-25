@@ -15,7 +15,7 @@ This plug-in, the **ResellingKori Fulfillment Connector** (`resellingkori-connec
 | WooCommerce | 7.0 or newer; High-Performance Order Storage or legacy order storage |
 | Store currency | **BDT** (ResellingKori accepts BDT only) |
 | Network | your shop may call `https://resellingkori.com` (this is all the plug-in ever contacts; the agent dashboard uses the same connection). HTTPS on your shop is strongly recommended so that ResellingKori can reach `…/wp-json/rkc/v1/webhook` (without it the shop checks for updates every 15 minutes instead) |
-| Scheduled tasks | WordPress' scheduler (WP-Cron) must run. On a quiet shop ask your host for a real cron job that runs every minute (see *Scheduled tasks* below); the agent dashboard feels instant only if the shop is looked at about once a minute |
+| Scheduled tasks | WordPress' scheduler (WP-Cron) must run. On a quiet shop ask your host for a real cron job that runs every minute (see *Scheduled tasks* below). The agent dashboard responds within about a minute only when the scheduler runs about once a minute |
 
 The plug-in declares compatibility with High-Performance Order Storage. This release was tested with PHP 8.3, WordPress 7.1 and WooCommerce 11.2 in both storage modes; other versions within the ranges above are expected to work but were not tested.
 
@@ -34,6 +34,8 @@ You need: administrator access to your WordPress, the **Key ID** (starts with `r
    5. **Orders** – preferences (which order statuses may be sent, which payment methods mean cash on delivery, what happens after sending) and the choice **"Show this shop's ResellingKori orders and products in my ResellingKori agent dashboard"**. The box is **already ticked** because it is the recommended choice, and the text above it says exactly what is shared. It only takes effect when you press *Save and continue*. **Untick it if you do not want the dashboard**; you can change your mind later under *Settings*.
    6. **Finish** – a summary and how to send an order.
 5. Send a first order by hand (see `RESELLER_SETUP.md`).
+
+![The six set-up steps](images/setup-steps.svg)
 
 **Who can do what.** Administrators can do everything. Shop managers can link products, view orders and send them (they cannot see or change the key or the dashboard switch). Other roles can be given the individual capabilities `rkc_manage_connection`, `rkc_manage_credentials`, `rkc_manage_mapping`, `rkc_submit_orders`, `rkc_view_orders`, `rkc_view_logs` with a role editor. Switching the agent dashboard on or off needs `rkc_manage_connection`.
 
@@ -69,7 +71,7 @@ Pretty permalinks (*Settings → Permalinks → Post name*) are recommended. Wit
 | Check | Expected |
 |---|---|
 | *Setup → Verify connection* | "Connected", with the right store and agent |
-| *Settings → Webhook address* | shows `https://<your-shop>/wp-json/rkc/v1/webhook`; after verification "Live status updates are active" appears on the last step |
+| *Settings → Connection → Webhook address* | shows `https://<your-shop>/wp-json/rkc/v1/webhook`; after verification "Live status updates are active" appears on the last step |
 | First order | send one cheap order, check it with ResellingKori, then cancel it from the order box |
 | *Settings → ResellingKori agent dashboard* (only if you switched it on) | a green **Working** badge and "Working. Last synced … ago." within a few minutes. **Waiting** with "ResellingKori has not switched the agent dashboard on for stores yet" means the shop side is ready and ResellingKori's side is not; nothing is wrong with your shop (see `TROUBLESHOOTING.md`) |
 | Your agent dashboard at ResellingKori | a menu entry named **ResellingKori** (it appears for agents whose shop has connected) with your orders and products |

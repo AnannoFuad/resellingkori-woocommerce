@@ -14,6 +14,8 @@ This guide is for the owner or staff of a WooCommerce shop (for example `example
 
 ## 2. Setup in six steps (WooCommerce → ResellingKori → Setup)
 
+![The six set-up steps](images/setup-steps.svg)
+
 1. **Welcome** – read the four checks. A "!" is a warning, not a stop: no HTTPS means live updates are replaced by a check every 15 minutes; a currency other than BDT means ResellingKori will refuse your orders.
 2. **Connect** – type the Key ID and the Secret. Nothing else is needed: your store, your sales agent and the address for live updates are taken from the key.
 3. **Verify** – press **Verify connection**. You must see **Connected** with *your* store name and *your* sales agent. If they are wrong, stop and tell ResellingKori. The *Continue* button stays disabled until the connection works.
@@ -36,6 +38,8 @@ Variable products: choose the exact variation. A link marked **needs review** is
 Products you do not link stay yours: ResellingKori never sees them.
 
 ## 4. Sending an order
+
+![Sending an order: review, check, confirm](images/send-order.svg)
 
 1. Open the order (*WooCommerce → Orders → the order*). Orders are offered for sending only in the statuses you allowed (default: *Processing* and *On hold*).
 2. In the **ResellingKori** box press **Review and send**.
@@ -79,6 +83,8 @@ If an order contains some ResellingKori products and some products that are **no
 Only those items are sent. For such an order **your own order status is never changed** by ResellingKori (the box says *Selected items only*), because the rest of the order is yours to fulfil. The status and tracking of the ResellingKori parcel are shown in the box.
 
 ### 4.2 After sending
+
+![How order status reaches your shop](images/status-updates.svg)
 
 The box now shows the **ResellingKori order** number, a status badge, the **Tracking** number and link (when the courier has one), **Cash to collect**, and when it was **Last updated**.
 
@@ -170,6 +176,17 @@ The card also shows the state – **Working**, **Waiting**, **Problem** or **Off
 
 ---
 
+## 10. Stock monitor and adding products from the dashboard (Connector 1.2.0)
+
+**Stock monitor.** For a linked product (or variation) you can let your shop follow ResellingKori's stock: when ResellingKori runs out, the product becomes *Out of stock* in your shop; when ResellingKori has it again, your earlier stock status comes back. Switch it on per product on the product's edit screen (*Inventory → ResellingKori stock monitor*; for variations inside each variation), or let your agent switch it on in the agent dashboard. It is off unless somebody switches it on, except for products added from the dashboard with the box ticked.
+
+* Your shop checks monitored products every 15 minutes, and within about a minute when ResellingKori reports a stock change through the agent dashboard sync. The stock itself is always read from ResellingKori's API.
+* If you manage stock **by quantity**, the quantity is never changed; the product is shown and sold as out of stock while ResellingKori is out.
+* Unlinking a product switches its monitor off and makes it available again.
+* Switch the monitor off before you deactivate or delete the plug-in: afterwards nothing brings a product back that the monitor made unavailable.
+
+**Adding products.** Your agent can pick ResellingKori products in the dashboard's *Add products* tab and set your selling prices. Your shop then creates each product itself – published, linked, with descriptions, SKU, categories (existing ones with the same name are used, missing ones are created) and pictures (downloaded in the background). Your shop refuses a price below ResellingKori's price, a product that is already linked, and a SKU your shop already uses. Adding products needs *Settings → Let the dashboard act* (on by default).
+
 ## ছোট্ট গাইড (বাংলা)
 
 1. **WooCommerce → ResellingKori → Setup** খুলুন।
@@ -184,3 +201,5 @@ The card also shows the state – **Working**, **Waiting**, **Problem** or **Off
 10. ড্যাশবোর্ডে ইমেইল, পুরো ঠিকানা বা পুরো ফোন নম্বর **যায় না**; শুধু নাম, শহর, আংশিক-ঢাকা ফোন (`017•••••678`), পণ্য ও টাকার হিসাব যায়। অর্ডার পাঠানোর সময় আগের মতোই প্রয়োজনীয় তথ্য যায়।
 11. শুধু দেখার জন্য রাখতে চাইলে দ্বিতীয় বক্স (“Let the dashboard send, cancel and link…”) বন্ধ রাখুন। পুরো ফিচার বন্ধ করলে ResellingKori-তে জমা থাকা সব তথ্য মুছে ফেলার অনুরোধ নিজে থেকেই চলে যায়।
 12. প্লাগইন ডিলিট করার আগে ড্যাশবোর্ড বন্ধ করে নিন; আর শপে প্রতি মিনিটে চলা একটি আসল cron job রাখলে ড্যাশবোর্ডের কাজ দ্রুত হয়।
+
+**নতুন (১.২.০):** *Stock monitor* চালু থাকলে ResellingKori-তে স্টক শেষ হলে আপনার শপেও পণ্যটি *Out of stock* হবে এবং স্টক ফিরলে আবার বিক্রি শুরু হবে (প্রোডাক্ট এডিট পেজে *Inventory → ResellingKori stock monitor*, অথবা এজেন্ট ড্যাশবোর্ড থেকে)। এজেন্ট ড্যাশবোর্ডের *Add products* ট্যাব থেকে ResellingKori-র পণ্য বেছে নিজের দাম দিলে আপনার শপে পণ্যটি সরাসরি Published ও লিঙ্ক করা অবস্থায় তৈরি হয়। প্লাগিন বন্ধ/ডিলিট করার আগে Stock monitor বন্ধ করুন।
